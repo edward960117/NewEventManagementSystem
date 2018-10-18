@@ -8,6 +8,7 @@ public class EventInfo {
     private String RegisterEventStartDate;
     private String RegisterEventRadiogroup;
     private String RegisterEventLocation;
+    private String fileName;
 
 
     //
@@ -15,7 +16,7 @@ public class EventInfo {
 
     }
 
-    public EventInfo(String registerEventId, String imageToUpload ,String registerEventName, String registerContactNumber, String registerEventStartDate, String registerEventRadiogroup, String registerEventLocation) {
+    public EventInfo(String registerEventId, String imageToUpload, String registerEventName, String registerContactNumber, String registerEventStartDate, String registerEventRadiogroup, String registerEventLocation, String fileName) {
         RegisterEventId = registerEventId;
         this.imageToUpload = imageToUpload;
         RegisterEventName = registerEventName;
@@ -23,6 +24,7 @@ public class EventInfo {
         RegisterEventStartDate = registerEventStartDate;
         RegisterEventRadiogroup = registerEventRadiogroup;
         RegisterEventLocation = registerEventLocation;
+        this.fileName = fileName;
     }
 
     public String getRegisterEventId() {
@@ -79,6 +81,14 @@ public class EventInfo {
 
     public void setRegisterEventLocation(String registerEventLocation) {
         RegisterEventLocation = registerEventLocation;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     @Override

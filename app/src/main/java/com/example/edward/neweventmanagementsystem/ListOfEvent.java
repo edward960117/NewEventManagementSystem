@@ -54,10 +54,10 @@ public class ListOfEvent extends AppCompatActivity {
 
                     @Override public void onLongItemClick(View view, int position) {
                         final String id = ((TextView)view.findViewById(R.id.RegisterEventId)).getText().toString();
-                        //final String filename = ((TextView)view.findViewById(R.id.fileName)).getText().toString();
+                        final String filename = ((TextView)view.findViewById(R.id.fileName)).getText().toString();
                         Toast.makeText(getBaseContext(),"Deleting of event id "+id,Toast.LENGTH_SHORT).show();
                         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-                        //storageReference.child("profileImageUrl").child(filename).delete();
+                        storageReference.child("profileImageUrl").child(filename).delete();
                         eventinfo.child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -83,7 +83,7 @@ public class ListOfEvent extends AppCompatActivity {
                 viewHolder.txtContact_number.setText(model.getRegisterContactNumber());
                 viewHolder.txtRegisterEventRadiogroup.setText(model.getRegisterEventRadiogroup());
                 viewHolder.txtRegisterEventLocation.setText(model.getRegisterEventLocation());
-//                viewHolder.fileName.setText(model.getFileName());
+                viewHolder.fileName.setText(model.getFileName());
 
                 //Picasso.with(getBaseContext()).load(model.getImageToUpload()).into(viewHolder.imageView);
                 //Glide.with(getBaseContext()).load(model.getImageToUpload()).into(viewHolder.imageView);

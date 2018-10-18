@@ -225,7 +225,7 @@ public class CreateEvent extends AppCompatActivity {
                                                     Toast.makeText(CreateEvent.this, "ID already exists!", Toast.LENGTH_SHORT).show();
                                                 }else {
                                                     mDialog.dismiss();
-                                                    EventInfo eventInfo = new EventInfo(mRegisterEventId.getText().toString().trim(),url,mEventNameText.getText().toString().trim(), mContactNumText.getText().toString().trim(), mEventDate.getText().toString().trim(), radioButton.getText().toString().trim(), mEventLocationText.getText().toString().trim());
+                                                    EventInfo eventInfo = new EventInfo(mRegisterEventId.getText().toString().trim(),url,mEventNameText.getText().toString().trim(), mContactNumText.getText().toString().trim(), mEventDate.getText().toString().trim(), radioButton.getText().toString().trim(), mEventLocationText.getText().toString().trim(), fileName);
                                                     System.out.println(eventInfo);
                                                     mDatabaseReference.child(mRegisterEventId.getText().toString()).setValue(eventInfo);
                                                     Toast.makeText(getApplicationContext(),"New event created successfully!",LENGTH_SHORT).show();

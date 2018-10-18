@@ -29,11 +29,11 @@
                 android:layout_gravity="center"
                 android:text="Date" />
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/fileName"/>-->
+
+
+
         </LinearLayout>
+
 
 
         <LinearLayout
@@ -81,13 +81,17 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/RegisterEventLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Location"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textStyle="bold" />
+            android:id="@+id/RegisterEventLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textStyle="bold" />
+
+
+
+
 
 
         </LinearLayout>
@@ -100,6 +104,10 @@
             android:cropToPadding="true"
             android:scaleType="centerCrop"/>
 
-
     </LinearLayout>
+    <TextView
+        android:id="@+id/fileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"/>
 </android.support.v7.widget.CardView>

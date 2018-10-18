@@ -12,20 +12,20 @@ import com.example.edward.neweventmanagementsystem.R;
 
 
 public class MenuViewHolder extends RecyclerView.ViewHolder {
-    public TextView  txtRegisterEventId, txtRegisterEventStartDate, txtRegisterEventName, txtContact_number, txtRegisterEventRadiogroup, txtRegisterEventLocation;
+    public TextView  fileName, txtRegisterEventId, txtRegisterEventStartDate, txtRegisterEventName, txtContact_number, txtRegisterEventRadiogroup, txtRegisterEventLocation;
     public ImageView imageView;
 
 
     public MenuViewHolder(@NonNull View itemView) {
         super(itemView);
         txtRegisterEventId = itemView.findViewById(R.id.RegisterEventId);
-        txtRegisterEventStartDate = (TextView) itemView.findViewById(R.id.RegisterEventStartDate);
-        txtRegisterEventName = (TextView) itemView.findViewById(R.id.RegisterEventName);
-        txtContact_number = (TextView) itemView.findViewById(R.id.contact_number);
-        txtRegisterEventRadiogroup = (TextView) itemView.findViewById(R.id.RegisterEventRadiogroup);
-        txtRegisterEventLocation = (TextView) itemView.findViewById(R.id.RegisterEventLocation);
-        imageView = (ImageView) itemView.findViewById(R.id.item_image);
-//        fileName = (TextView) itemView.findViewById(R.id.fileName);
+        txtRegisterEventStartDate = itemView.findViewById(R.id.RegisterEventStartDate);
+        txtRegisterEventName = itemView.findViewById(R.id.RegisterEventName);
+        txtContact_number = itemView.findViewById(R.id.contact_number);
+        txtRegisterEventRadiogroup = itemView.findViewById(R.id.RegisterEventRadiogroup);
+        txtRegisterEventLocation = itemView.findViewById(R.id.RegisterEventLocation);
+        imageView = itemView.findViewById(R.id.item_image);
+        fileName = itemView.findViewById(R.id.fileName);
     }
 
 }
