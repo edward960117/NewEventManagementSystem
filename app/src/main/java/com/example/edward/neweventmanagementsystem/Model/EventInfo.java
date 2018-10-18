@@ -9,7 +9,8 @@ public class EventInfo {
     private String RegisterEventRadiogroup;
     private String RegisterEventLocation;
 
-//
+
+    //
     public EventInfo(){
 
     }
@@ -34,7 +35,7 @@ public class EventInfo {
 
     public String getImageToUpload() {
         return imageToUpload;
-   }
+    }
 
     public void setImageToUpload(String imageToUpload) {
         this.imageToUpload = imageToUpload;

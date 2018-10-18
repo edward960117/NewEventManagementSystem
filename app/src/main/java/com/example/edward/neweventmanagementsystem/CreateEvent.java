@@ -203,9 +203,6 @@ public class CreateEvent extends AppCompatActivity {
 //                mDatabaseReference.updateChildren(userInfo);
                 final String fileName = System.currentTimeMillis()+"";
 
-
-
-
                 final StorageReference storageReference = storage.getReference();
 
                 System.out.println(uriImage);
@@ -219,7 +216,7 @@ public class CreateEvent extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Uri> task) {
                                         final String url = task.getResult().toString();
                                         System.out.println("Important" + url);
-                                        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+                                        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                 if(dataSnapshot.child(mRegisterEventId.getText().toString()).exists()) {
@@ -231,12 +228,16 @@ public class CreateEvent extends AppCompatActivity {
                                                     EventInfo eventInfo = new EventInfo(mRegisterEventId.getText().toString().trim(),url,mEventNameText.getText().toString().trim(), mContactNumText.getText().toString().trim(), mEventDate.getText().toString().trim(), radioButton.getText().toString().trim(), mEventLocationText.getText().toString().trim());
                                                     System.out.println(eventInfo);
                                                     mDatabaseReference.child(mRegisterEventId.getText().toString()).setValue(eventInfo);
+                                                    Toast.makeText(getApplicationContext(),"New event created successfully!",LENGTH_SHORT).show();
+                                                    Intent ManageEventMenu =  new Intent(CreateEvent.this, com.example.edward.neweventmanagementsystem.ManageEventMenu.class);
+                                                    startActivity(ManageEventMenu);
                                                 }
+
                                             }
 
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError databaseError) {
-                                                storageReference.child("profileImageUrl").child(fileName).delete();
+
                                             }
                                         });
                                     }
@@ -258,9 +259,8 @@ public class CreateEvent extends AppCompatActivity {
 
 
 
-                Toast.makeText(getApplicationContext(),"New event created successfully!",LENGTH_SHORT).show();
-                Intent ManageEventMenu =  new Intent(CreateEvent.this, com.example.edward.neweventmanagementsystem.ManageEventMenu.class);
-                startActivity(ManageEventMenu);
+
+
             }
         });
     }
