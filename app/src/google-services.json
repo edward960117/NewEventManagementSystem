@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "117222677968",
+    "firebase_url": "https://ems-for-organization.firebaseio.com",
+    "project_id": "ems-for-organization",
+    "storage_bucket": "ems-for-organization.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117222677968:android:f6a9b51ca4af7787",
+        "android_client_info": {
+          "package_name": "com.example.edward.eventmanagementsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117222677968-1u0ir7bfjprs1h1i2fl74676tuskhi1o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.edward.eventmanagementsystem",
+            "certificate_hash": "8754f2bbe35db2c814cac6d06cf76bb33b29e343"
+          }
+        },
+        {
+          "client_id": "117222677968-7kbd58pjaeiskom2c1u7cu6bk6ksjv8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_NWs1A4zr_vhqrSH9qIumJJ5COCjl3cQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117222677968-7kbd58pjaeiskom2c1u7cu6bk6ksjv8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117222677968:android:0ab48c23a8020acd",
+        "android_client_info": {
+          "package_name": "com.example.edward.eventmangementsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117222677968-d7p1lmv9crfe775vd4t6m734fjfia965.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.edward.eventmangementsystem",
+            "certificate_hash": "8754f2bbe35db2c814cac6d06cf76bb33b29e343"
+          }
+        },
+        {
+          "client_id": "117222677968-7kbd58pjaeiskom2c1u7cu6bk6ksjv8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_NWs1A4zr_vhqrSH9qIumJJ5COCjl3cQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117222677968-7kbd58pjaeiskom2c1u7cu6bk6ksjv8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
