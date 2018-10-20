@@ -232,12 +232,10 @@ public class CreateEvent extends AppCompatActivity {
                                                     Intent ManageEventMenu =  new Intent(CreateEvent.this, com.example.edward.neweventmanagementsystem.ManageEventMenu.class);
                                                     startActivity(ManageEventMenu);
                                                 }
-
                                             }
 
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError databaseError) {
-
                                             }
                                         });
                                     }
@@ -247,20 +245,12 @@ public class CreateEvent extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(getApplicationContext(),"File not Successfully Uploaded",LENGTH_SHORT).show();
-
                     }
                 }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
                     }
                 });
-
-
-
-
-
-
             }
         });
     }

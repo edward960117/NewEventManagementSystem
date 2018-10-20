@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,10 +20,12 @@ import com.example.edward.neweventmanagementsystem.Model.ListInfo;
 //import com.example.edward.neweventmanagementsystem.ViewHolder.ItemClickListener;
 import com.example.edward.neweventmanagementsystem.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -32,6 +36,8 @@ public class ListOfEvent extends AppCompatActivity {
 
     RecyclerView recycle_menu;
     RecyclerView.LayoutManager layoutManager;
+
+    FirebaseRecyclerAdapter <EventInfo, MenuViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,32 +76,55 @@ public class ListOfEvent extends AppCompatActivity {
     }
 
     public void loadMenu(){
+        Query query = eventinfo.orderByKey();
+        FirebaseRecyclerOptions firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<EventInfo>().setQuery(query, EventInfo.class).build();
+        adapter = new FirebaseRecyclerAdapter<EventInfo, MenuViewHolder>(firebaseRecyclerOptions) {
 
-        FirebaseRecyclerAdapter <EventInfo, MenuViewHolder> adapter = new FirebaseRecyclerAdapter<EventInfo, MenuViewHolder>(EventInfo.class, R.layout.activity_list, MenuViewHolder.class, eventinfo) {
 
+            @NonNull
+            @Override
+            public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_list,viewGroup,false);
+                return new MenuViewHolder(view);
+            }
 
             @Override
-            protected void populateViewHolder(MenuViewHolder viewHolder, EventInfo model, int position) {
-
-                viewHolder.txtRegisterEventId.setText(model.getRegisterEventId());
-                viewHolder.txtRegisterEventStartDate.setText(model.getRegisterEventStartDate());
-                viewHolder.txtRegisterEventName.setText(model.getRegisterEventName());
-                viewHolder.txtContact_number.setText(model.getRegisterContactNumber());
-                viewHolder.txtRegisterEventRadiogroup.setText(model.getRegisterEventRadiogroup());
-                viewHolder.txtRegisterEventLocation.setText(model.getRegisterEventLocation());
-                viewHolder.fileName.setText(model.getFileName());
+            protected void onBindViewHolder(@NonNull MenuViewHolder holder, int position, @NonNull EventInfo model) {
+                holder.txtRegisterEventId.setText(model.getRegisterEventId());
+                holder.txtRegisterEventStartDate.setText(model.getRegisterEventStartDate());
+                holder.txtRegisterEventName.setText(model.getRegisterEventName());
+                holder.txtContact_number.setText(model.getRegisterContactNumber());
+                holder.txtRegisterEventRadiogroup.setText(model.getRegisterEventRadiogroup());
+                holder.txtRegisterEventLocation.setText(model.getRegisterEventLocation());
+                holder.fileName.setText(model.getFileName());
 
                 //Picasso.with(getBaseContext()).load(model.getImageToUpload()).into(viewHolder.imageView);
                 //Glide.with(getBaseContext()).load(model.getImageToUpload()).into(viewHolder.imageView);
 
                 Glide.with(getBaseContext()).load(model.getImageToUpload()
-                ).into(viewHolder.imageView);
+                ).into(holder.imageView);
                 System.out.println(model.getRegisterEventName());
                 System.out.println(model.getImageToUpload());
             }
+
+//            @Override
+//            protected void populateViewHolder(MenuViewHolder viewHolder, EventInfo model, int position) {
+//
+//
+//            }
         };
         recycle_menu.setAdapter(adapter);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
 }
