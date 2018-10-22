@@ -18,6 +18,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB_WurEMzF2BwyhibyeAoumCzDiKhM251w" />
+
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +41,18 @@
         <activity android:name=".ManageEventMenu" />
         <activity android:name=".CreateEvent" />
         <activity android:name=".ListOfEvent" />
-        <activity android:name=".List"></activity>
+        <activity android:name=".List" />
+        <activity android:name=".ManageLocation" />
+        <activity android:name=".StaffAllocation" />
+        <activity android:name=".StaffManagement" />
+        <activity android:name=".NewAddedStaff" />
+        <activity android:name=".ExistingStaff"></activity>
+
+        <provider
+            android:name="com.example.edward.neweventmanagementsystem.provider.PlaceContentProvider"
+            android:authorities="com.example.edward.neweventmanagementsystem"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

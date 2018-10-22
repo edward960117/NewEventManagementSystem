@@ -6,17 +6,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.edward.neweventmanagementsystem.Model.EventInfo;
-import com.example.edward.neweventmanagementsystem.Model.ListInfo;
 //import com.example.edward.neweventmanagementsystem.ViewHolder.ItemClickListener;
 import com.example.edward.neweventmanagementsystem.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -64,6 +60,7 @@ public class ListOfEvent extends AppCompatActivity {
                         Toast.makeText(getBaseContext(),"Deleting of event id "+id,Toast.LENGTH_SHORT).show();
                         StorageReference storageReference = FirebaseStorage.getInstance().getReference();
                         storageReference.child("profileImageUrl").child(filename).delete();
+
                         eventinfo.child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -79,8 +76,6 @@ public class ListOfEvent extends AppCompatActivity {
         Query query = eventinfo.orderByKey();
         FirebaseRecyclerOptions firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<EventInfo>().setQuery(query, EventInfo.class).build();
         adapter = new FirebaseRecyclerAdapter<EventInfo, MenuViewHolder>(firebaseRecyclerOptions) {
-
-
             @NonNull
             @Override
             public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {

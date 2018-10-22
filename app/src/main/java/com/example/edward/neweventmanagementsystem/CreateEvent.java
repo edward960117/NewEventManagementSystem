@@ -17,6 +17,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -52,17 +54,18 @@ import static android.widget.Toast.LENGTH_SHORT;
 public class CreateEvent extends AppCompatActivity {
 
     private static final String TAG = "activity_create_event";
-    private Uri filePath;
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-    private DatabaseReference mDatabaseReference;
+    private DatabaseReference mDatabaseReference, mDatabaseReference1;
     private Button mRegisterButton;
-    EditText mEventNameText, mContactNumText, mEventLocationText, mRegisterEventId;;
+    EditText mEventNameText, mContactNumText, mRegisterEventId;;
+    AutoCompleteTextView mEventLocationText;
     TextView mEventDate;
     RadioGroup mEventType;
     FirebaseStorage storage;
     StorageReference storageRef,imageRef;
-    Uri uriImage ;//= Uri.parse("com.example.edward.eventmanagementsystem.ManageEvent/"+ R.drawable.ic_launcher_background);
+    FirebaseDatabase database;
+    Uri uriImage ;
     public static final int PICK_IMAGE = 1;
     ImageView mimageToUpload;
 
@@ -117,9 +120,40 @@ public class CreateEvent extends AppCompatActivity {
         mContactNumText = (EditText) findViewById(R.id.RegisterContactNumber);
         mEventDate = (TextView) findViewById(R.id.RegisterEventStartDate);
         mEventType =  (RadioGroup) findViewById(R.id.RegisterEventRadiogroup);
-        mEventLocationText = (EditText) findViewById(R.id.RegisterEventLocation);
+        final AutoCompleteTextView mEventLocationText = (AutoCompleteTextView) findViewById(R.id.RegisterEventLocation);
         mimageToUpload = (ImageView) findViewById(R.id.imageToUpload);
         mRegisterButton = (Button) findViewById(R.id.btnRegisterEvent);
+        ImageView image = (ImageView) findViewById(R.id.image);
+
+
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        //Create a new ArrayAdapter with your context and the simple layout for the dropdown menu provided by Android
+        final ArrayAdapter<String> autoComplete = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
+        database.child("Location").addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //Basically, this says "For each DataSnapshot *Data* in dataSnapshot, do what's inside the method.
+                for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                //Get the suggestion by childing the key of the string you want to get.
+                String name = suggestionSnapshot.child("name").getValue(String.class);
+                //Add the retrieved string to the list
+                autoComplete.add(name);
+                }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        AutoCompleteTextView RegisterEventLocation= (AutoCompleteTextView)findViewById(R.id.RegisterEventLocation);
+        RegisterEventLocation.setAdapter(autoComplete);
+
+//        image.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mEventLocationText.showDropDown();
+//            }
+//        });
 
         mimageToUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,7 +260,6 @@ public class CreateEvent extends AppCompatActivity {
                                                 }else {
                                                     mDialog.dismiss();
                                                     EventInfo eventInfo = new EventInfo(mRegisterEventId.getText().toString().trim(),url,mEventNameText.getText().toString().trim(), mContactNumText.getText().toString().trim(), mEventDate.getText().toString().trim(), radioButton.getText().toString().trim(), mEventLocationText.getText().toString().trim(), fileName);
-                                                    System.out.println(eventInfo);
                                                     mDatabaseReference.child(mRegisterEventId.getText().toString()).setValue(eventInfo);
                                                     Toast.makeText(getApplicationContext(),"New event created successfully!",LENGTH_SHORT).show();
                                                     Intent ManageEventMenu =  new Intent(CreateEvent.this, com.example.edward.neweventmanagementsystem.ManageEventMenu.class);

@@ -102,6 +102,34 @@
                 android:textColorLink="@android:color/holo_red_dark" />/>
             <!--</android.support.design.widget.TextInputLayout>-->
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <AutoCompleteTextView
+                    android:id="@+id/RegisterEventLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="Location"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/darkGrey"
+                    android:textColorLink="@android:color/holo_red_dark" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/image"
+                    android:padding="5dp"
+                    android:layout_alignTop="@+id/RegisterEventLocation"
+                    android:layout_alignBottom="@+id/RegisterEventLocation"
+                    android:layout_alignRight="@+id/RegisterEventLocation"
+                    android:src="@mipmap/baseline_arrow_drop_down_black_18dp"/>
+
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -189,21 +217,6 @@
             <!--<android.support.design.widget.TextInputLayout-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content">-->
-
-            <EditText
-                android:id="@+id/RegisterEventLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:hint="Location"
-                android:inputType="text"
-                android:textColor="@color/black"
-                android:textColorHint="@color/darkGrey"
-                android:textColorLink="@android:color/holo_red_dark" />
-            <!--</android.support.design.widget.TextInputLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
