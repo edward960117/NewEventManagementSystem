@@ -19,6 +19,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -45,8 +47,10 @@ public class ListOfEvent extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
 
         recycle_menu.setLayoutManager(layoutManager);
-        database  = FirebaseDatabase.getInstance();
-        eventinfo = database.getReference("ListOfEvent");
+
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        eventinfo = FirebaseDatabase.getInstance().getReference().child("ListOfEvent").child(currentFirebaseUser.getUid());
+
         loadMenu();
         recycle_menu.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, recycle_menu ,new RecyclerItemClickListener.OnItemClickListener() {
@@ -85,6 +89,7 @@ public class ListOfEvent extends AppCompatActivity {
 
             @Override
             protected void onBindViewHolder(@NonNull MenuViewHolder holder, int position, @NonNull EventInfo model) {
+
                 holder.txtRegisterEventId.setText(model.getRegisterEventId());
                 holder.txtRegisterEventStartDate.setText(model.getRegisterEventStartDate());
                 holder.txtRegisterEventName.setText(model.getRegisterEventName());

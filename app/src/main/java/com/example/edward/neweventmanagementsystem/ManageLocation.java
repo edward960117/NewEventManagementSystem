@@ -48,7 +48,7 @@ public class ManageLocation extends AppCompatActivity implements
     FirebaseDatabase database;
     private RecyclerView mRecyclerView;
     private GoogleApiClient mClient;
-    private Geofencing mGeofencing;
+
     private DatabaseReference mDatabaseReference;
 
     RecyclerView.LayoutManager layoutManager;
@@ -93,8 +93,6 @@ public class ManageLocation extends AppCompatActivity implements
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(this, this)
                 .build();
-
-        mGeofencing = new Geofencing(this, mClient);
 
     }
 

@@ -114,54 +114,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("Organizer");
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
 
+        // Initialize Firebase Auth
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
 
+//        if (mAuth.getCurrentUser() != null) {
+//            startActivity(new Intent(LoginActivity.this, NavigationBar.class));
+//            finish();
+//        }
+
 
         Button mEmailSignInButton = (Button) findViewById(R.id.loginButton);
-//        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                attemptLogin();
-//                    final ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
-//                    mDialog.setMessage("Please waiting...");
-//                    mDialog.show();
-//
-//                    table_user.addValueEventListener(new ValueEventListener(){
-//
-//                        public void onDataChange(DataSnapshot dataSnapshot){
-//
-//                            //Check if user not exist in database
-//                            if(dataSnapshot.child(mEmailView.getText().toString()).exists()) {
-//
-//                                //get user information
-//                                mDialog.dismiss();
-//                                Organizer organizer = dataSnapshot.child(mEmailView.getText().toString()).getValue(Organizer.class);
-//                                if (organizer.getPassword().equals(mPasswordView.getText().toString())) {
-//                                    Toast.makeText(LoginActivity.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
-//                                    Intent MainMenu =  new Intent(LoginActivity.this, com.example.edward.neweventmanagementsystem.NavigationBar.class);
-////                                    Common.currentUser = organizer;
-//                                    startActivity(MainMenu);
-//                                    finish();
-//                                } else {
-//                                    Toast.makeText(LoginActivity.this, "Login In fail!", Toast.LENGTH_SHORT).show();
-//                                }
-//                            }else{
-//                                Toast.makeText(LoginActivity.this, "Sorry User not exist!", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {
-//
-//                        }
-//                    });
-//
-//            }
-//        });
+
 
         btnRegister = (TextView)findViewById(R.id.registerLink);
 
@@ -211,16 +176,16 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public void handleLogin(View view){
         String email = this.mEmailView.getText().toString();
-        String pasword = this.mPasswordView.getText().toString();
+        String password = this.mPasswordView.getText().toString();
         if(TextUtils.isEmpty(email)){
             mEmailView.setError("Required");
             return;
         }
-        if(TextUtils.isEmpty(pasword)){
+        if(TextUtils.isEmpty(password)){
             mPasswordView.setError("Required");
             return;
         }
-        mAuth.signInWithEmailAndPassword(email, pasword)
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -229,6 +194,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         FirebaseUser user = mAuth.getCurrentUser();
                         Log.i(TAG, "Login Successfully. Email: " + user.getEmail());
                         Toast.makeText(LoginActivity.this, "User login successful. Email:" + user.getEmail(), Toast.LENGTH_SHORT).show();
+
+
 
                         Intent intent =  new Intent(LoginActivity.this, com.example.edward.neweventmanagementsystem.NavigationBar.class);
                         startActivity(intent);

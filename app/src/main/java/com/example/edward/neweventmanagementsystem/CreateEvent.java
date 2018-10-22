@@ -58,7 +58,7 @@ public class CreateEvent extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private DatabaseReference mDatabaseReference, mDatabaseReference1;
     private Button mRegisterButton;
-    EditText mEventNameText, mContactNumText, mRegisterEventId;;
+    EditText mEventNameText, mContactNumText, mRegisterEventId;
     AutoCompleteTextView mEventLocationText;
     TextView mEventDate;
     RadioGroup mEventType;
@@ -120,10 +120,12 @@ public class CreateEvent extends AppCompatActivity {
         mContactNumText = (EditText) findViewById(R.id.RegisterContactNumber);
         mEventDate = (TextView) findViewById(R.id.RegisterEventStartDate);
         mEventType =  (RadioGroup) findViewById(R.id.RegisterEventRadiogroup);
-        final AutoCompleteTextView mEventLocationText = (AutoCompleteTextView) findViewById(R.id.RegisterEventLocation);
+        final AutoCompleteTextView mEventLocationText = findViewById(R.id.RegisterEventLocation);
         mimageToUpload = (ImageView) findViewById(R.id.imageToUpload);
         mRegisterButton = (Button) findViewById(R.id.btnRegisterEvent);
         ImageView image = (ImageView) findViewById(R.id.image);
+
+
 
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -259,8 +261,12 @@ public class CreateEvent extends AppCompatActivity {
                                                     Toast.makeText(CreateEvent.this, "ID already exists!", Toast.LENGTH_SHORT).show();
                                                 }else {
                                                     mDialog.dismiss();
+
+                                                    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+                                                    //Toast.makeText(CreateEvent.this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
+
                                                     EventInfo eventInfo = new EventInfo(mRegisterEventId.getText().toString().trim(),url,mEventNameText.getText().toString().trim(), mContactNumText.getText().toString().trim(), mEventDate.getText().toString().trim(), radioButton.getText().toString().trim(), mEventLocationText.getText().toString().trim(), fileName);
-                                                    mDatabaseReference.child(mRegisterEventId.getText().toString()).setValue(eventInfo);
+                                                    mDatabaseReference.child(currentFirebaseUser.getUid()).child(mRegisterEventId.getText().toString()).setValue(eventInfo);
                                                     Toast.makeText(getApplicationContext(),"New event created successfully!",LENGTH_SHORT).show();
                                                     Intent ManageEventMenu =  new Intent(CreateEvent.this, com.example.edward.neweventmanagementsystem.ManageEventMenu.class);
                                                     startActivity(ManageEventMenu);

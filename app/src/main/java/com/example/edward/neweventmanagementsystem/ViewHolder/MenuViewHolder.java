@@ -12,7 +12,7 @@ import com.example.edward.neweventmanagementsystem.R;
 
 
 public class MenuViewHolder extends RecyclerView.ViewHolder {
-    public TextView  fileName, txtRegisterEventId, txtRegisterEventStartDate, txtRegisterEventName, txtContact_number, txtRegisterEventRadiogroup, txtRegisterEventLocation;
+    public TextView fileName, txtRegisterEventId, txtRegisterEventStartDate, txtRegisterEventName, txtContact_number, txtRegisterEventRadiogroup, txtRegisterEventLocation;
     public ImageView imageView;
 
 
