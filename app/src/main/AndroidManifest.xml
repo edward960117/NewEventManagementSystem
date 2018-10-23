@@ -35,7 +35,7 @@
             android:label="@string/title_activity_login" />
         <activity android:name=".Register" />
         <activity
-            android:name=".NavigationBar"
+            android:name=".MainActivity"
             android:label="@string/title_activity_navigation_bar"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ManageEventMenu" />

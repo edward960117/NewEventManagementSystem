@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class NavigationBar extends AppCompatActivity
+public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseDatabase database;
@@ -60,6 +60,8 @@ public class NavigationBar extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
         //set name for the user
 //        View headerView = navigationView.getHeaderView(0);
@@ -126,12 +128,19 @@ public class NavigationBar extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.Home) {
 
-        } else if (id == R.id.nav_gallery) {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.App_Info) {
 
+        } else if (id == R.id.Logout) {
+
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            finishAffinity();
+            startActivity(intent);
+            Toast.makeText(getBaseContext(),"Logout successfully", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
