@@ -16,4 +16,9 @@ public class StaffAllocation extends AppCompatActivity {
         Intent intent = new Intent(this, StaffManagement.class);
         startActivity(intent);
     }
+
+    public void OpenCalendar (View view){
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
+    }
 }

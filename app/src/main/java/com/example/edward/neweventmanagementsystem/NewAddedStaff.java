@@ -35,7 +35,7 @@ public class NewAddedStaff extends AppCompatActivity {
 
         //Init Firebase
         FirebaseDatabase firebaseDatabase;
-        final DatabaseReference table_user = FirebaseDatabase.getInstance().getReference().child("SatffInfo");
+        final DatabaseReference table_user = FirebaseDatabase.getInstance().getReference().child("StaffInfo");
 
         //        //Init Firebase
 //        FirebaseDatabase database = FirebaseDatabase.getInstance();

@@ -20,7 +20,7 @@ public class StaffManagement extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public  void OpenExistingSatff (View view){
+    public  void OpenExistingStaff (View view){
         Intent intent = new Intent(this, ExistingStaff.class);
         startActivity(intent);
     }
