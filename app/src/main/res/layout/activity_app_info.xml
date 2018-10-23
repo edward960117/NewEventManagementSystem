@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/calenderLayout"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="10"
+        android:background="#3397D4"
+        android:padding="2dp"
+        android:layout_height="wrap_content" android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/backToMain"
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="wrap_content"
+
+            android:background="#3397D4"
+            android:textColor="#fff"
+            android:src="@drawable/back"
+            android:scaleType="fitStart"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="App Info"
+        android:textSize="28dp"
+        android:id="@+id/title"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/developerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Developer Name: Liew Man Chun"
+        android:layout_below="@id/title"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/developerEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Developer Email: liewmanchun@gmail.com"
+        android:layout_below="@id/developerName"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Application Version: 1.0"
+        android:layout_below="@id/developerEmail"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

@@ -135,6 +135,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.App_Info) {
 
+            Intent intent = new Intent(MainActivity.this, app_info.class);
+            startActivity(intent);
+
         } else if (id == R.id.Logout) {
 
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
