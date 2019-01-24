@@ -26,12 +26,12 @@
         <!-- Google Calendar API -->
         <meta-data
             android:name="com.google.android.calendar.v2.API_KEY"
-            android:value="AIzaSyBOqpDde_CFua8zr8YbIAjpsEq1we5CEeY" />
+            android:value="@string/GoogleCalendarApi" />
 
         <!-- - Google Place API -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB_WurEMzF2BwyhibyeAoumCzDiKhM251w" />
+            android:value="@string/GooglePlaceApi" />
 
         <activity android:name=".Splash">
             <intent-filter>
@@ -53,8 +53,7 @@
         <activity android:name=".ListOfEvent" />
         <activity android:name=".List" />
         <activity android:name=".ManageLocation" />
-        <activity android:name=".StaffAllocation" />
-        <activity android:name=".StaffManagement" />
+        <activity android:name=".StaffAttendance" />
         <activity android:name=".NewAddedStaff" />
         <activity android:name=".ExistingStaff" />
 
@@ -64,7 +63,14 @@
             android:exported="false" />
 
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".app_info"></activity>
+        <activity android:name=".app_info" />
+        <activity android:name=".chat_room" />
+        <activity android:name=".Find_Event" />
+        <activity android:name=".StaffAttendanceCheckIn" />
+        <activity android:name=".eventDialog" />
+        <activity android:name=".StaffAttendanceRecordTable" />
+        <activity android:name=".AttendanceListMain" />
+        <activity android:name=".attendanceListMainList"></activity>
     </application>
 
 </manifest>

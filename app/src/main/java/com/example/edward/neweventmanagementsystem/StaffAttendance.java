@@ -1,31 +1,26 @@
 package com.example.edward.neweventmanagementsystem;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class ManageEventMenu extends AppCompatActivity {
+public class StaffAttendance extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_event_menu);
-
-
+        setContentView(R.layout.activity_staff_attendance);
     }
 
-    public void OpenCreateEvent (View view) {
-        Intent intent = new Intent(this, CreateEvent.class);
+
+    public void OpenStaffCheckIn (View view){
+        Intent intent = new Intent(this, StaffAttendanceCheckIn.class);
         startActivity(intent);
     }
-    public void OpenListOfEvent (View view) {
-        Intent intent = new Intent(this, ListOfEvent.class);
+
+    public void OpenStaffAttendanceRecordTable (View view){
+        Intent intent = new Intent(this, StaffAttendanceRecordTable.class);
         startActivity(intent);
     }
 

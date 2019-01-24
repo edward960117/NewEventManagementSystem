@@ -145,7 +145,7 @@ public class Register extends AppCompatActivity {
                             finish();
                         }else {
                             Log.w(TAG, "createuserWithEmail:faiure", task.getException());
-                            Toast.makeText(Register.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Register.this, "Email account have register!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

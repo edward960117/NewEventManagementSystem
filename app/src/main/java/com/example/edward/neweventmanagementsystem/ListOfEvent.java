@@ -1,6 +1,12 @@
 package com.example.edward.neweventmanagementsystem;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +19,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.edward.neweventmanagementsystem.Model.EventInfo;
-//import com.example.edward.neweventmanagementsystem.ViewHolder.ItemClickListener;
 import com.example.edward.neweventmanagementsystem.ViewHolder.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -30,11 +35,16 @@ import com.google.firebase.storage.StorageReference;
 public class ListOfEvent extends AppCompatActivity {
 
     FirebaseDatabase database;
-    DatabaseReference eventinfo;
-
+    DatabaseReference eventInfo, eventInfo1, AttendanceRecord;
+    FloatingActionButton search_item;
     RecyclerView recycle_menu;
     RecyclerView.LayoutManager layoutManager;
 
+    private View viewTable;
+
+    private Dialog dialogTable;
+    private TextView RegisterEventId,RegisterEventName,EventCapacity,RegisterEventLocation,
+            RegisterContactNumber, RegisterEventStartDate,EventPrice ;
     FirebaseRecyclerAdapter <EventInfo, MenuViewHolder> adapter;
 
     @Override
@@ -48,36 +58,106 @@ public class ListOfEvent extends AppCompatActivity {
 
         recycle_menu.setLayoutManager(layoutManager);
 
+        search_item = (FloatingActionButton) findViewById(R.id.search_item);
+
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        eventinfo = FirebaseDatabase.getInstance().getReference().child("ListOfEvent").child(currentFirebaseUser.getUid());
+        eventInfo = FirebaseDatabase.getInstance().getReference().child("ListOfEvent").child(currentFirebaseUser.getUid());
+        eventInfo1 = FirebaseDatabase.getInstance().getReference().child("ListOfEvent1");
+        AttendanceRecord = FirebaseDatabase.getInstance().getReference().child("AttendanceRecord");
 
         loadMenu();
+
+        viewTable = getLayoutInflater().inflate(R.layout.activity_event_dialog,null);
+        RegisterEventId = viewTable.findViewById(R.id.RegisterEventId);
+        RegisterEventName = viewTable.findViewById(R.id.RegisterEventName);
+        EventCapacity = viewTable.findViewById(R.id.EventCapacity);
+        RegisterEventLocation = viewTable.findViewById(R.id.RegisterEventLocation);
+        RegisterContactNumber = viewTable.findViewById(R.id.RegisterContactNumber);
+        RegisterEventStartDate =  viewTable.findViewById(R.id.RegisterEventStartDate);
+        EventPrice =  viewTable.findViewById(R.id.EventPrice);
+        dialogTable = new Dialog(this,R.style.full_screen_dialog);
+        dialogTable.setContentView(viewTable);
+
         recycle_menu.addOnItemTouchListener(
-                new RecyclerItemClickListener(this, recycle_menu ,new RecyclerItemClickListener.OnItemClickListener() {
+                new RecyclerItemClickListener(getBaseContext(), recycle_menu ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
+
+
+                        final String id = ((TextView)view.findViewById(R.id.RegisterEventId)).getText().toString();
+                        RegisterEventId.setText(id);
+
+                        final String registerEventName = ((TextView)view.findViewById(R.id.RegisterEventName)).getText().toString();
+                        RegisterEventName.setText(registerEventName);
+
+                        final String eventCapacity = ((TextView)view.findViewById(R.id.txtEventCapacity)).getText().toString();
+                        EventCapacity.setText(eventCapacity);
+
+                        final String registerEventLocation = ((TextView)view.findViewById(R.id.RegisterEventLocation)).getText().toString();
+                        RegisterEventLocation.setText(registerEventLocation);
+//
+                        final String registerContactNumber = ((TextView)view.findViewById(R.id.contact_number)).getText().toString();
+                        RegisterContactNumber.setText(registerContactNumber);
+
+                        final String registerEventStartDate = ((TextView)view.findViewById(R.id.RegisterEventStartDate)).getText().toString();
+                        RegisterEventStartDate.setText(registerEventStartDate);
+
+                        final String eventPrice = ((TextView)view.findViewById(R.id.txtEventPrice)).getText().toString();
+                        EventPrice.setText(eventPrice);
+                        dialogTable.show();
 
                     }
 
-                    @Override public void onLongItemClick(View view, int position) {
-                        final String id = ((TextView)view.findViewById(R.id.RegisterEventId)).getText().toString();
-                        final String filename = ((TextView)view.findViewById(R.id.fileName)).getText().toString();
-                        Toast.makeText(getBaseContext(),"Deleting of event id "+id,Toast.LENGTH_SHORT).show();
-                        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-                        storageReference.child("profileImageUrl").child(filename).delete();
+                    @Override public void onLongItemClick(final View view, int position) {
+                        final String name = ((TextView)view.findViewById(R.id.RegisterEventName)).getText().toString();
+                        System.out.println("Testing the name: "+name);
+                        new AlertDialog.Builder(ListOfEvent.this)
+                                .setTitle("Alert!")
+                                .setMessage("Do you want to delete event "+name+"?")
+                                .setNegativeButton(android.R.string.no, null)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                        eventinfo.child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(getBaseContext(),"Event id "+id+" has been deleted.",Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                                    public void onClick(DialogInterface arg0, int arg1) {
+//                                        setResult(RESULT_OK, new Intent().putExtra("EXIT", true));
+//                                        finish();
+                                        final String id = ((TextView)view.findViewById(R.id.RegisterEventId)).getText().toString();
+                                        final String filename = ((TextView)view.findViewById(R.id.fileName)).getText().toString();
+                                        Toast.makeText(getBaseContext(),"Deleting of event id "+id,Toast.LENGTH_SHORT).show();
+                                        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+                                        storageReference.child("profileImageUrl").child(filename).delete();
+
+                                        AttendanceRecord.child(id).removeValue();
+                                        eventInfo.child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                eventInfo1.child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        Toast.makeText(getBaseContext(),"Event id "+id+" has been deleted.",Toast.LENGTH_SHORT).show();
+                                                        }
+                                                        });
+
+                                            }
+                                        });
+                                    }
+
+                                }).create().show();
+
+
                     }
                 })
         );
+        search_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent search = new Intent(ListOfEvent.this, Find_Event.class);
+                startActivity(search);
+            }
+        });
     }
 
     public void loadMenu(){
-        Query query = eventinfo.orderByKey();
+        Query query = eventInfo.orderByKey();
         FirebaseRecyclerOptions firebaseRecyclerOptions = new FirebaseRecyclerOptions.Builder<EventInfo>().setQuery(query, EventInfo.class).build();
         adapter = new FirebaseRecyclerAdapter<EventInfo, MenuViewHolder>(firebaseRecyclerOptions) {
             @NonNull
@@ -93,13 +173,15 @@ public class ListOfEvent extends AppCompatActivity {
                 holder.txtRegisterEventId.setText(model.getRegisterEventId());
                 holder.txtRegisterEventStartDate.setText(model.getRegisterEventStartDate());
                 holder.txtRegisterEventName.setText(model.getRegisterEventName());
-                holder.txtContact_number.setText(model.getRegisterContactNumber());
+                holder.txtRegisterContactNumber.setText(model.getRegisterContactNumber());
                 holder.txtRegisterEventRadiogroup.setText(model.getRegisterEventRadiogroup());
                 holder.txtRegisterEventLocation.setText(model.getRegisterEventLocation());
-                holder.fileName.setText(model.getFileName());
 
-                //Picasso.with(getBaseContext()).load(model.getImageToUpload()).into(viewHolder.imageView);
-                //Glide.with(getBaseContext()).load(model.getImageToUpload()).into(viewHolder.imageView);
+
+                holder.txtEventPrice.setText(model.getEventPrice());
+                holder.txtEventCapacity.setText(model.getEventCapacity());
+
+                holder.fileName.setText(model.getFileName());
 
                 Glide.with(getBaseContext()).load(model.getImageToUpload()
                 ).into(holder.imageView);
@@ -107,11 +189,6 @@ public class ListOfEvent extends AppCompatActivity {
                 System.out.println(model.getImageToUpload());
             }
 
-//            @Override
-//            protected void populateViewHolder(MenuViewHolder viewHolder, EventInfo model, int position) {
-//
-//
-//            }
         };
         recycle_menu.setAdapter(adapter);
     }
@@ -127,4 +204,6 @@ public class ListOfEvent extends AppCompatActivity {
         super.onStop();
         adapter.stopListening();
     }
+
+
 }

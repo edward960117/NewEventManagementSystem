@@ -51,7 +51,7 @@ public class Splash extends AppCompatActivity {
             public void run() {
                 endSplash();
             }
-        }, 3000);
+        }, 1000);
 
 
 //        new Handler().postDelayed(new Runnable() {

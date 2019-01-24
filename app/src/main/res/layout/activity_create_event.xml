@@ -58,6 +58,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:hint="Event ID"
+                android:maxLength="4"
                 android:inputType="text"
                 android:textColor="#000000"
                 android:layout_below="@id/imageToUpload"
@@ -95,6 +96,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:hint="Contact Number"
+                android:maxLength="11"
                 android:layout_marginTop="5dp"
                 android:inputType="phone"
                 android:textColor="@color/black"
@@ -202,6 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Paid Event"
+                        android:checked="true"
                         android:textSize="18dp" />
 
                     <RadioButton
@@ -214,28 +217,58 @@
                 </RadioGroup>
             </LinearLayout>>
 
-            <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/EventPrice"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="Event Price (RM)"
+                android:maxLength="4"
+                android:inputType="number"
+                android:textColor="#000000"
+                android:layout_below="@id/RegisterEventRadiogroup"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@android:color/darker_gray"
+                android:textColorLink="@android:color/holo_red_dark" />
 
-                <Button
-                    android:id="@+id/btnRegisterEvent"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:background="@android:color/holo_red_dark"
-                    android:textSize="18dp"
-                    android:text="Confirm" />
+            <EditText
+                android:id="@+id/EventCapacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="Event Capacity (Eg.100)"
+                android:maxLength="4"
+                android:inputType="number"
+                android:textColor="#000000"
+                android:layout_below="@id/EventPrice"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@android:color/darker_gray"
+                android:textColorLink="@android:color/holo_red_dark" />
 
-            </LinearLayout>
+            <Button
+                android:id="@+id/btnRegisterEvent"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/holo_red_dark"
+                android:textSize="18dp"
+                android:text="Confirm" />
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="horizontal">-->
+
+
+
+            <!--</LinearLayout>-->
         </LinearLayout>
 
     </RelativeLayout>

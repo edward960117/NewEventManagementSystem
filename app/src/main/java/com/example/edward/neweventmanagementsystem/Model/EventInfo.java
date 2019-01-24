@@ -9,14 +9,14 @@ public class EventInfo {
     private String RegisterEventRadiogroup;
     private String RegisterEventLocation;
     private String fileName;
+    private  String EventPrice;
+    private  String EventCapacity;
 
-
-    //
     public EventInfo(){
 
     }
 
-    public EventInfo(String registerEventId, String imageToUpload, String registerEventName, String registerContactNumber, String registerEventStartDate, String registerEventRadiogroup, String registerEventLocation, String fileName) {
+    public EventInfo(String registerEventId, String imageToUpload, String registerEventName, String registerContactNumber, String registerEventStartDate, String registerEventRadiogroup, String registerEventLocation, String fileName, String eventPrice, String eventCapacity) {
         RegisterEventId = registerEventId;
         this.imageToUpload = imageToUpload;
         RegisterEventName = registerEventName;
@@ -25,6 +25,13 @@ public class EventInfo {
         RegisterEventRadiogroup = registerEventRadiogroup;
         RegisterEventLocation = registerEventLocation;
         this.fileName = fileName;
+        EventPrice = eventPrice;
+        EventCapacity = eventCapacity;
+    }
+
+    public EventInfo(String registerEventName, String registerEventStartDate) {
+        RegisterEventName = registerEventName;
+        RegisterEventStartDate = registerEventStartDate;
     }
 
     public String getRegisterEventId() {
@@ -91,6 +98,22 @@ public class EventInfo {
         this.fileName = fileName;
     }
 
+    public String getEventPrice() {
+        return EventPrice;
+    }
+
+    public void setEventPrice(String eventPrice) {
+        EventPrice = eventPrice;
+    }
+
+    public String getEventCapacity() {
+        return EventCapacity;
+    }
+
+    public void setEventCapacity(String eventCapacity) {
+        EventCapacity = eventCapacity;
+    }
+
     @Override
     public String toString() {
         return "EventInfo{" +
@@ -101,6 +124,8 @@ public class EventInfo {
                 ", RegisterEventStartDate='" + RegisterEventStartDate + '\'' +
                 ", RegisterEventRadiogroup='" + RegisterEventRadiogroup + '\'' +
                 ", RegisterEventLocation='" + RegisterEventLocation + '\'' +
+                ", EventPrice='" + EventPrice + '\'' +
+                ", EventCapacity='" + EventCapacity + '\'' +
                 '}';
     }
 }

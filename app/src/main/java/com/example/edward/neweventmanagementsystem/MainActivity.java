@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -25,11 +26,13 @@ public class MainActivity extends AppCompatActivity
 
     FirebaseDatabase database;
     DatabaseReference organizer;
-    TextView mName, mEmail;
+    TextView showName, showEmail;
 
     RecyclerView recycle_menu;
     RecyclerView.LayoutManager layoutManager;
-
+    private long backPressedTime = 0;
+    GoogleSignInClient mGoogleSignInClient;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,9 @@ public class MainActivity extends AppCompatActivity
 
         //init firebase
         database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         organizer = database.getReference("Organizer");
+
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +67,15 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+
+        View headerView = navigationView.getHeaderView(0);
+        showEmail = (TextView) headerView.findViewById(R.id.txtEmail);
+        showEmail.setText(currentUser.getEmail());
+
+        showName = (TextView) headerView.findViewById(R.id.txtName);
+        showName.setText(currentUser.getDisplayName());
 
         //set name for the user
 //        View headerView = navigationView.getHeaderView(0);
@@ -81,7 +95,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void OpenScheduling (View view) {
-        Intent intent = new Intent(this, StaffAllocation.class);
+        Intent intent = new Intent(this, CalendarActivity.class);
         startActivity(intent);
     }
 
@@ -90,15 +104,37 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void OpenChatRoom (View view) {
+        Intent intent = new Intent(this, chat_room.class);
+        startActivity(intent);
+    }
+
+    public void StaffAttandance (View view) {
+        Intent intent = new Intent(this, StaffAttendance.class);
+        startActivity(intent);
+    }
+    //    @Override
+//    public void onBackPressed() {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
+
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+    public void onBackPressed() {        // to prevent irritating accidental logouts
+        long t = System.currentTimeMillis();
+        if (t - backPressedTime > 2000) {    // 2 secs
+            backPressedTime = t;
+            Toast.makeText(this, "Press back again to logout", Toast.LENGTH_SHORT).show();
+        } else {    // this guy is serious
+            // clean up
+            super.onBackPressed();       // bye
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -140,6 +176,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.Logout) {
 
+//            mGoogleSignInClient.signOut();
+            mAuth.signOut();
+
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             finishAffinity();
             startActivity(intent);
@@ -150,4 +189,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
 }

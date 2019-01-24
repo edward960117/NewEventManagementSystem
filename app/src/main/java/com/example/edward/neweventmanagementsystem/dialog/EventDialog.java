@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,6 +84,29 @@ public class EventDialog extends DialogFragment implements View.OnClickListener,
                 dismiss();
                 break;
             case R.id.createEvent:
+
+                final String title = eventTitle.getText().toString().trim();
+                final String des = eventDes.getText().toString().trim();
+                final String location = eventLocation.getText().toString().trim();
+                final String attendee = eventAttendee.getText().toString().trim();
+
+                if (TextUtils.isEmpty(title)) {
+                    eventTitle.setError("Enter Event Title!");
+                    return;
+                }
+                if (TextUtils.isEmpty(des)) {
+                    eventDes.setError("Enter Event Description!");
+                    return;
+                }
+                if (TextUtils.isEmpty(location)) {
+                    eventLocation.setError("Enter Event Location!");
+                    return;
+                }
+                if (TextUtils.isEmpty(attendee)) {
+                    eventAttendee.setError("Enter Event Attendee!");
+                    return;
+                }
+
                 Calendar startCalendar = Calendar.getInstance();
                 startCalendar.set(Calendar.DAY_OF_MONTH, startDate.getDayOfMonth());
                 startCalendar.set(Calendar.MONTH, startDate.getMonth());

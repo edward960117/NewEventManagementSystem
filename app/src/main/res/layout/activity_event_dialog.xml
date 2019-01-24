@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.example.edward.neweventmanagementsystem.eventDialog">
+
+    <TextView
+        android:id="@+id/RegisterEventId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="132dp"
+        android:layout_marginTop="92dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/EventIDText"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="92dp"
+        android:text="Event ID:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="140dp"
+    android:layout_marginTop="16dp"
+    android:text="Event Info"
+    android:textSize="25dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+    android:id="@+id/EventNameText"
+    android:layout_width="wrap_content"
+    android:layout_height="22dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="124dp"
+    android:text="Event Name:"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/RegisterEventName"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginLeft="132dp"
+        android:layout_marginTop="124dp"
+        android:text="Event Name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+    android:id="@+id/EventCapacityText"
+    android:layout_width="wrap_content"
+    android:layout_height="22dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="160dp"
+    android:text="Event Capacity:"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/EventCapacity"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginLeft="132dp"
+        android:layout_marginTop="160dp"
+        android:text="Capacity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+    android:id="@+id/EventLocationText"
+    android:layout_width="wrap_content"
+    android:layout_height="22dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="196dp"
+    android:text="Event Location:"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+    android:id="@+id/RegisterEventLocation"
+    android:layout_width="wrap_content"
+    android:layout_height="22dp"
+    android:layout_marginLeft="132dp"
+    android:layout_marginTop="196dp"
+    android:text="EventLocation"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+    android:id="@+id/EventContactText"
+    android:layout_width="wrap_content"
+    android:layout_height="22dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="232dp"
+    android:text="Event Contact:"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+    android:id="@+id/RegisterContactNumber"
+    android:layout_width="wrap_content"
+    android:layout_height="22dp"
+    android:layout_marginLeft="132dp"
+    android:layout_marginTop="232dp"
+    android:text="Contact"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+    <ImageView
+    android:id="@+id/DatePic"
+    android:layout_width="wrap_content"
+    android:layout_height="22dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="56dp"
+    android:src="@drawable/ic_access_time_black_24dp"
+    android:text="Capacity"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+    android:id="@+id/RegisterEventStartDate"
+    android:layout_width="wrap_content"
+    android:layout_height="22dp"
+    android:layout_marginLeft="48dp"
+    android:layout_marginTop="56dp"
+    android:text="EventDate"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+    android:id="@+id/MoneyPic"
+    android:layout_width="wrap_content"
+    android:layout_height="22dp"
+    android:layout_marginLeft="256dp"
+    android:layout_marginTop="56dp"
+    android:src="@drawable/ic_attach_money_black_24dp"
+    android:text="Capacity"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+    android:id="@+id/MoneyRM"
+    android:layout_width="wrap_content"
+    android:layout_height="22dp"
+    android:layout_marginLeft="280dp"
+    android:layout_marginTop="56dp"
+    android:text="RM"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+    android:id="@+id/EventPrice"
+    android:layout_width="wrap_content"
+    android:layout_height="22dp"
+    android:layout_marginLeft="308dp"
+    android:layout_marginTop="56dp"
+    android:text="EventPrice"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

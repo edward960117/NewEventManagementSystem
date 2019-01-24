@@ -1,8 +1,10 @@
 package com.example.edward.neweventmanagementsystem;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -14,6 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.edward.neweventmanagementsystem.Model.EventInfo;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,7 +50,14 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import static android.widget.Toast.LENGTH_SHORT;
@@ -56,18 +67,25 @@ public class CreateEvent extends AppCompatActivity {
     private static final String TAG = "activity_create_event";
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+
     private DatabaseReference mDatabaseReference, mDatabaseReference1;
+
+
     private Button mRegisterButton;
-    EditText mEventNameText, mContactNumText, mRegisterEventId;
+    EditText mEventNameText, mContactNumText, mRegisterEventId, mRegisterEventPrice, mRegisterEventCapacity;
     AutoCompleteTextView mEventLocationText;
     TextView mEventDate;
     RadioGroup mEventType;
     FirebaseStorage storage;
+
     StorageReference storageRef,imageRef;
     FirebaseDatabase database;
     Uri uriImage ;
     public static final int PICK_IMAGE = 1;
     ImageView mimageToUpload;
+    private long backPressedTime = 0;
+    GoogleSignInClient mGoogleSignInClient;
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +96,8 @@ public class CreateEvent extends AppCompatActivity {
         actionBar.hide();
 
         FirebaseDatabase firebaseDatabase;
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("ListOfEvent"); //.push();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("ListOfEvent"); //For Organizer use.
+        mDatabaseReference1 = FirebaseDatabase.getInstance().getReference().child("ListOfEvent1"); //For User site use, handle the .child problem
 
         mRegisterButton = (Button)findViewById(R.id.btnRegisterEvent);
         storage = FirebaseStorage.getInstance();
@@ -96,8 +115,7 @@ public class CreateEvent extends AppCompatActivity {
                 DatePickerDialog dialog = new DatePickerDialog(
                         CreateEvent.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateSetListener,
-                        year, month, day);
+                        mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -108,6 +126,7 @@ public class CreateEvent extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 month = month + 1;
                 Log.d(TAG, "onDateSet: date: mm/dd/yyyy: " + month + "/" + day + "/" + year);
+//                SimpleDateFormat date = new SimpleDateFormat("EEEE dd MMM yyyy", Locale.ENGLISH);
 
                 String date = month +  "/"  + day + "/" + year;
                 mDisplayDate.setText(date);
@@ -124,38 +143,62 @@ public class CreateEvent extends AppCompatActivity {
         mimageToUpload = (ImageView) findViewById(R.id.imageToUpload);
         mRegisterButton = (Button) findViewById(R.id.btnRegisterEvent);
         ImageView image = (ImageView) findViewById(R.id.image);
+        mRegisterEventPrice = (EditText) findViewById(R.id.EventPrice);
+        mRegisterEventCapacity = (EditText) findViewById(R.id.EventCapacity);
 
+        mEventType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId==R.id.type1)
+                {
+                    mRegisterEventPrice.setVisibility(View.VISIBLE);
+                }
+                else if(checkedId==R.id.type2)
+                {
+                    mRegisterEventPrice.setVisibility(View.GONE);
+                    mRegisterEventPrice.setText("Free");
+                }
+            }
+        });
 
-
+//        mEventType.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup mEventType, int checkedId) {
+//
+//                if(checkedId==R.id.type1)
+//                {
+//                    mRegisterEventPrice.setVisibility(View.VISIBLE);
+//
+//                }
+//                else if(checkedId==R.id.type2)
+//                {
+//                    mRegisterEventPrice.setVisibility(View.INVISIBLE);
+//                }
+//            }
+//
 
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+
         //Create a new ArrayAdapter with your context and the simple layout for the dropdown menu provided by Android
         final ArrayAdapter<String> autoComplete = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1);
         database.child("Location").addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //Basically, this says "For each DataSnapshot *Data* in dataSnapshot, do what's inside the method.
                 for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
-                //Get the suggestion by childing the key of the string you want to get.
-                String name = suggestionSnapshot.child("name").getValue(String.class);
-                //Add the retrieved string to the list
-                autoComplete.add(name);
+                    //Get the suggestion by childing the key of the string you want to get.
+                    String name = suggestionSnapshot.child("name").getValue(String.class);
+                    //Add the retrieved string to the list
+                    autoComplete.add(name);
                 }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+            }
+        });
         AutoCompleteTextView RegisterEventLocation= (AutoCompleteTextView)findViewById(R.id.RegisterEventLocation);
         RegisterEventLocation.setAdapter(autoComplete);
-
-//        image.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mEventLocationText.showDropDown();
-//            }
-//        });
 
         mimageToUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,8 +218,7 @@ public class CreateEvent extends AppCompatActivity {
             public void onClick(View v) {
 
                 final ProgressDialog mDialog = new ProgressDialog(CreateEvent.this);
-                mDialog.setMessage("Please waiting...");
-                mDialog.show();
+
 
                 int selectedId = mEventType.getCheckedRadioButtonId();
                 final RadioButton radioButton = (RadioButton)findViewById(selectedId);
@@ -187,6 +229,13 @@ public class CreateEvent extends AppCompatActivity {
                 final String date = mEventDate.getText().toString().trim();
                 final String type = radioButton.getText().toString().trim();
                 final String location = mEventLocationText.getText().toString().trim();
+                final String price = mRegisterEventPrice.getText().toString().trim();
+                final String EventCapacity = mRegisterEventCapacity.getText().toString().trim();
+
+                if(uriImage == null){
+                    Toast.makeText(getApplicationContext(),"Please select an image.",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (TextUtils.isEmpty(id)) {
                     mRegisterEventId.setError("Enter Event ID!");
@@ -197,46 +246,39 @@ public class CreateEvent extends AppCompatActivity {
                     mEventNameText.setError("Enter Event Name!");
                     return;
                 }
-
-
-                if (TextUtils.isEmpty(location)) {
-                    mEventLocationText.setError("Enter Location!");
-                    return;
-                }
-
-
-                if (TextUtils.isEmpty(type)) {
-                    radioButton.setError("Please select type of event type!");
-                    return;
-                }
                 if(isValidPhone(contact)){
-
-                    Toast.makeText(getApplicationContext(),"Phone number is valid",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"Phone number is valid",Toast.LENGTH_SHORT).show();
                 }else {
                     mContactNumText.setError("Phone number is not valid");
                     Toast.makeText(getApplicationContext(),"Phone number is not valid",Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-
+                if (TextUtils.isEmpty(location)) {
+                    mEventLocationText.setError("Enter Location!");
+                    return;
+                }
                 if (TextUtils.isEmpty(date)) {
                     mEventDate.setError("Please select event date!");
                     return;
                 }
-
-                if(uriImage == null){
-                    Toast.makeText(getApplicationContext(),"Please select an image.",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(type)) {
+                    radioButton.setError("Please select type of event type!");
+                    return;
+                }
+                if (TextUtils.isEmpty(price)) {
+                    mRegisterEventPrice.setError("Enter the price!");
                     return;
                 }
 
-//                Map userInfo = new HashMap();
-//                userInfo.put("mEventNameText", name);
-//                userInfo.put("mContactNumText", contact);
-//                userInfo.put("mEventDate", date);
-//                userInfo.put("radioButton", type);
-//                userInfo.put("mEventLocationText", location);
-//
-//                mDatabaseReference.updateChildren(userInfo);
+                if (TextUtils.isEmpty(EventCapacity)){
+                    mRegisterEventCapacity.setError("Enter the capacity");
+                    return;
+                }
+
+
+                mDialog.setMessage("Please waiting...");
+                mDialog.show();
+
                 final String fileName = System.currentTimeMillis()+"";
 
                 final StorageReference storageReference = storage.getReference();
@@ -252,26 +294,41 @@ public class CreateEvent extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Uri> task) {
                                         final String url = task.getResult().toString();
                                         System.out.println("Important" + url);
+
+                                        //not yetsolve bypass the uuid and check the event id
                                         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                if(dataSnapshot.child(mRegisterEventId.getText().toString()).exists()) {
+                                                FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+
+                                                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                                                DatabaseReference uidRef = rootRef.child("ListOfEvent1"); //.child(uid);
+
+                                                if(dataSnapshot.child(currentFirebaseUser.getUid()).child(mRegisterEventId.getText().toString()).exists()) {
                                                     mDialog.dismiss();
                                                     storageReference.child("profileImageUrl").child(fileName).delete();
                                                     Toast.makeText(CreateEvent.this, "ID already exists!", Toast.LENGTH_SHORT).show();
-                                                }else {
+                                                }
+                                                else {
                                                     mDialog.dismiss();
 
-                                                    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+//                                                    FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
                                                     //Toast.makeText(CreateEvent.this, "" + currentFirebaseUser.getUid(), Toast.LENGTH_SHORT).show();
 
-                                                    EventInfo eventInfo = new EventInfo(mRegisterEventId.getText().toString().trim(),url,mEventNameText.getText().toString().trim(), mContactNumText.getText().toString().trim(), mEventDate.getText().toString().trim(), radioButton.getText().toString().trim(), mEventLocationText.getText().toString().trim(), fileName);
+                                                    EventInfo eventInfo = new EventInfo(mRegisterEventId.getText().toString().trim(),url,
+                                                            mEventNameText.getText().toString().trim(), mContactNumText.getText().toString().trim(),
+                                                            mEventDate.getText().toString().trim(), radioButton.getText().toString().trim(),
+                                                            mEventLocationText.getText().toString().trim(), fileName, mRegisterEventPrice.getText().toString().trim(),
+                                                            mRegisterEventCapacity.getText().toString().trim());
+
                                                     mDatabaseReference.child(currentFirebaseUser.getUid()).child(mRegisterEventId.getText().toString()).setValue(eventInfo);
+                                                    mDatabaseReference1.child(mRegisterEventId.getText().toString()).setValue(eventInfo);
                                                     Toast.makeText(getApplicationContext(),"New event created successfully!",LENGTH_SHORT).show();
                                                     Intent ManageEventMenu =  new Intent(CreateEvent.this, com.example.edward.neweventmanagementsystem.ManageEventMenu.class);
                                                     startActivity(ManageEventMenu);
                                                 }
                                             }
+
 
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -292,6 +349,22 @@ public class CreateEvent extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Alert!")
+                .setMessage("All the information will erase if ok button is press on.")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        setResult(RESULT_OK, new Intent().putExtra("EXIT", true));
+                        finish();
+                    }
+
+                }).create().show();
     }
 
 
@@ -320,7 +393,6 @@ public class CreateEvent extends AppCompatActivity {
         Intent photoPickerIntent  = new Intent();
         photoPickerIntent .setType("image/*");
         photoPickerIntent .setAction(Intent.ACTION_OPEN_DOCUMENT);
-//        startActivityForResult(photoPickerIntent , Selected);
         startActivityForResult(photoPickerIntent ,86);
     }
 

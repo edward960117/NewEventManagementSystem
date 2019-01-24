@@ -175,6 +175,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:onClick="StaffAttandance"
                         android:orientation="vertical">
 
                         <ImageView
@@ -207,43 +208,43 @@
                 </android.support.v7.widget.CardView>
 
                 <!--<android.support.v7.widget.CardView-->
-                    <!--android:layout_width="160dp"-->
-                    <!--android:layout_height="190dp"-->
-                    <!--android:layout_margin="10dp">-->
+                <!--android:layout_width="160dp"-->
+                <!--android:layout_height="190dp"-->
+                <!--android:layout_margin="10dp">-->
 
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:gravity="center"-->
-                        <!--android:orientation="vertical">-->
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="vertical">-->
 
-                        <!--<ImageView-->
-                            <!--android:layout_width="64dp"-->
-                            <!--android:layout_height="64dp"-->
-                            <!--android:src="@drawable/ic_headset_black_24dp"-->
-                            <!--android:padding="10dp"-->
-                            <!--android:background="@drawable/circlebackgroundyellow"/>-->
+                <!--<ImageView-->
+                <!--android:layout_width="64dp"-->
+                <!--android:layout_height="64dp"-->
+                <!--android:src="@drawable/ic_headset_black_24dp"-->
+                <!--android:padding="10dp"-->
+                <!--android:background="@drawable/circlebackgroundyellow"/>-->
 
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:textStyle="bold"-->
-                            <!--android:layout_marginTop="10dp"-->
-                            <!--android:layout_marginBottom="5dp"-->
-                            <!--android:text="Manage Gatgets/Event"/>-->
-                        <!--<View-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="1dp"-->
-                            <!--android:background="@color/lightGrey"/>-->
-                        <!--<TextView-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:padding="5dp"-->
-                            <!--android:textColor="@color/darkGrey"-->
-                            <!--android:text="Manage the gatget to be sell and event."-->
-                            <!--android:gravity="center"/>-->
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textStyle="bold"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:text="Manage Gatgets/Event"/>-->
+                <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@color/lightGrey"/>-->
+                <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:padding="5dp"-->
+                <!--android:textColor="@color/darkGrey"-->
+                <!--android:text="Manage the gatget to be sell and event."-->
+                <!--android:gravity="center"/>-->
 
-                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
                 <!--</android.support.v7.widget.CardView>-->
             </LinearLayout>
 
@@ -265,6 +266,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:onClick="OpenChatRoom"
                         android:orientation="vertical">
 
                         <ImageView
@@ -280,7 +282,7 @@
                             android:textStyle="bold"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
-                            android:text="Broadcasting"/>
+                            android:text="Chat Room"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -290,61 +292,61 @@
                             android:layout_height="wrap_content"
                             android:padding="5dp"
                             android:textColor="@color/darkGrey"
-                            android:text="Broadcast the message to user."
+                            android:text="The chat room for organizer to discussion."
                             android:gravity="center"/>
 
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="160dp"
-                    android:layout_height="190dp"
-                    android:layout_margin="10dp">
+                <!--<android.support.v7.widget.CardView-->
+                    <!--android:layout_width="160dp"-->
+                    <!--android:layout_height="190dp"-->
+                    <!--android:layout_margin="10dp">-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:gravity="center"-->
+                        <!--android:orientation="vertical">-->
 
-                        <ImageView
-                            android:layout_width="64dp"
-                            android:layout_height="64dp"
-                            android:background="@drawable/circlebackgroundgrey"
-                            android:padding="10dp"
-                            android:src="@drawable/ic_settings_black_24dp" />
+                        <!--<ImageView-->
+                            <!--android:layout_width="64dp"-->
+                            <!--android:layout_height="64dp"-->
+                            <!--android:background="@drawable/circlebackgroundgrey"-->
+                            <!--android:padding="10dp"-->
+                            <!--android:src="@drawable/ic_settings_black_24dp" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="10dp"
-                            android:text="System Administration"
-                            android:textStyle="bold" />
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginBottom="5dp"-->
+                            <!--android:layout_marginTop="10dp"-->
+                            <!--android:text="System Administration"-->
+                            <!--android:textStyle="bold" />-->
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/lightGrey" />
+                        <!--<View-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="1dp"-->
+                            <!--android:background="@color/lightGrey" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:padding="5dp"
-                            android:text="Create user account and other of settings."
-                            android:textColor="@color/darkGrey" />
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:gravity="center"-->
+                            <!--android:padding="5dp"-->
+                            <!--android:text="Create user account and other of settings."-->
+                            <!--android:textColor="@color/darkGrey" />-->
 
-                    </LinearLayout>
-                </android.support.v7.widget.CardView>
+                    <!--</LinearLayout>-->
+                <!--</android.support.v7.widget.CardView>-->
             </LinearLayout>
 
             <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:gravity="center"-->
-                <!--android:clipToPadding="false"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
+            <!--android:orientation="horizontal"-->
+            <!--android:gravity="center"-->
+            <!--android:clipToPadding="false"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
 
 

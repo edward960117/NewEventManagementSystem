@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (c) 2017. http://hiteshsahu.com- All Rights Reserved
-  ~ Unauthorized copying of this file, via any medium is strictly prohibited
-  ~ If you use or distribute this project then you MUST ADD A COPY OF LICENCE
-  ~ along with the project.
-  ~  Written by Hitesh Sahu <hiteshkrsahu@Gmail.com>, 2017.
-  -->
 
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/purplewhite"
+
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -57,13 +50,18 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/search_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:layout_gravity="bottom|end|right"
+        android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_search_black_24dp"
-        app:layout_anchor="@+id/appbar"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:backgroundTint="@color/alice_blue" />
+
+    <!--app:layout_anchor="@+id/appbar"-->
+    <!--app:layout_anchorGravity="bottom|right|end"-->
 
 </android.support.design.widget.CoordinatorLayout>

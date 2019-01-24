@@ -21,48 +21,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <android.support.v7.widget.CardView
-                android:layout_width="160dp"
-                android:layout_height="190dp"
-                android:layout_margin="10dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:onClick="OpenStafffManagement"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:background="@drawable/circlebackgroundblue"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_people_black_24dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="10dp"
-                        android:text="Staff Management"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/lightGrey" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:text="Manage the information of employee."
-                        android:textColor="@color/darkGrey" />
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:layout_width="160dp"
@@ -73,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:onClick="OpenCalendar"
+                    android:onClick="OpenStaffCheckIn"
                     android:orientation="vertical">
 
                     <ImageView
@@ -88,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="10dp"
-                        android:text="Timetable"
+                        android:text="Check in Attendance"
                         android:textStyle="bold" />
 
                     <View
@@ -101,7 +60,50 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="5dp"
-                        android:text="Show out all shift of employee in timetable"
+                        android:text="Let the user to check in attendance."
+                        android:textColor="@color/darkGrey" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="190dp"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:onClick="OpenStaffAttendanceRecordTable"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:background="@drawable/circlebackgroundblue"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_people_black_24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Staff Attendance Record"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/lightGrey" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="View the record of the staff attendance."
                         android:textColor="@color/darkGrey" />
 
                 </LinearLayout>

@@ -1,9 +1,5 @@
 package com.example.edward.neweventmanagementsystem.Model;
 
-/**
- * Created by Khushvinders on 21-Oct-16.
- */
-
 public class ScheduledEvents {
     private String eventId;
     private String eventSummery;

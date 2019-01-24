@@ -68,7 +68,7 @@ public class NewAddedStaff extends AppCompatActivity {
                                 table_user.child(mStaffId.getText().toString()).setValue(organizer);
 
                                 Toast.makeText(NewAddedStaff.this, "New Staff Added successfully!", Toast.LENGTH_SHORT).show();
-                                Intent intent =  new Intent(NewAddedStaff.this, com.example.edward.neweventmanagementsystem.StaffAllocation.class);
+                                Intent intent =  new Intent(NewAddedStaff.this, StaffAttendance.class);
                                 startActivity(intent);
 
                             }else{

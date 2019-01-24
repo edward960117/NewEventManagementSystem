@@ -12,7 +12,7 @@ import com.example.edward.neweventmanagementsystem.R;
 
 
 public class MenuViewHolder extends RecyclerView.ViewHolder {
-    public TextView fileName, txtRegisterEventId, txtRegisterEventStartDate, txtRegisterEventName, txtContact_number, txtRegisterEventRadiogroup, txtRegisterEventLocation;
+    public TextView checkInName, txtEventPrice, txtRegisterContactNumber, txtEventCapacity, fileName, txtRegisterEventId, txtRegisterEventStartDate, txtRegisterEventName, txtContact_number, txtRegisterEventRadiogroup, txtRegisterEventLocation;
     public ImageView imageView;
 
 
@@ -21,11 +21,14 @@ public class MenuViewHolder extends RecyclerView.ViewHolder {
         txtRegisterEventId = itemView.findViewById(R.id.RegisterEventId);
         txtRegisterEventStartDate = itemView.findViewById(R.id.RegisterEventStartDate);
         txtRegisterEventName = itemView.findViewById(R.id.RegisterEventName);
-        txtContact_number = itemView.findViewById(R.id.contact_number);
+        txtRegisterContactNumber = itemView.findViewById(R.id.contact_number);
         txtRegisterEventRadiogroup = itemView.findViewById(R.id.RegisterEventRadiogroup);
         txtRegisterEventLocation = itemView.findViewById(R.id.RegisterEventLocation);
+        txtEventCapacity = itemView.findViewById(R.id.txtEventCapacity);
+        txtEventPrice = itemView.findViewById(R.id.txtEventPrice);
         imageView = itemView.findViewById(R.id.item_image);
         fileName = itemView.findViewById(R.id.fileName);
+        checkInName = itemView.findViewById(R.id.checkInName);
     }
 
 }
